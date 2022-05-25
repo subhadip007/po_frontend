@@ -1,0 +1,14 @@
+.dragger{
+    /* top: 292px;
+left: 420px; */
+position: relative;
+right: 25em;
+top: 10em;
+width: 9em;
+height: 90em;
+/* UI Properties */
+background: #FAFBFD 0% 0% no-repeat padding-box;
+border: 1px dashed #CBCBCB;
+border-radius: 8px;
+opacity: 1;
+}

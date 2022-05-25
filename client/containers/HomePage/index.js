@@ -1,39 +1,55 @@
+/* eslint-disable import/first */
 import React from 'react';
+import { InboxOutlined } from '@ant-design/icons';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 import image from '../../assets/images/photo.jpg';
+import { message, Upload } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+import './index.css';
+import Demo from './form';
 
-export default class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: 'Akhil',
-    };
-    this.handleUserChange = this.handleUserChange.bind(this);
-  }
+const { Dragger } = Upload;
+const props = {
+  name: 'file',
+  multiple: true,
+  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
 
-  handleUserChange(evt) {
-    this.setState({
-      user: evt.target.value,
-    });
-  }
+  onChange(info) {
+    const { status } = info.file;
 
-  render() {
-    return (
-      <div>
-        <Helmet>
-          <title> This is the home page </title>
-        </Helmet>
-        <h1>
-          Home Page Component!
-        </h1>
-        <img src={image} alt="" height="300" />
-        <br />
-        <br />
-        <strong>Type username and change user</strong> <br /><br />
-        <input value={this.state.user} onChange={this.handleUserChange} placeholder="user" /> <br /><br />
-        <Link to={`/${this.state.user}`}>Link to user the page</Link>
-      </div>
-    );
-  }
-}
+    if (status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+
+    if (status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully.`);
+    } else if (status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+
+  onDrop(e) {
+    console.log('Dropped files', e.dataTransfer.files);
+  },
+};
+
+const HomePage = () => (
+  <div>
+  <Dragger {...props} className="dragger">
+    <p className="ant-upload-drag-icon">
+      <InboxOutlined />
+    </p>
+   
+    <Button icon={<UploadOutlined />} style={{backgroundColor:'#37b047'}}>Click to Upload</Button>
+  
+
+  
+  </Dragger>
+  <Demo/>
+  </div>
+);
+
+
+export default HomePage;

@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { renderRoutes } from 'react-router-config';
 import { hot } from 'react-hot-loader';
-
+import 'antd/dist/antd.min.css';
 import routes from './routes';
 import store from './configureStore';
 
